@@ -1,14 +1,15 @@
 package org.example;
 
 public class Animal {
-    private String name;
-    private Integer age;
-    private String vaccination;
-    private String color;
-    private String species;
-    private Owner owner;
-    private Integer legsCount;
+    protected String name;
+    protected Integer age;
+    protected String vaccination;
+    protected String color;
+    protected String species;
+    protected Owner owner;
+    protected Integer legsCount;
 
+    //---Constructors---
     public Animal(String name, Integer age, String vaccination, String color,
             String species, Owner owner, Integer legsCount) {
         this.name = name;
@@ -20,19 +21,25 @@ public class Animal {
         this.legsCount = legsCount;
     }
     public Animal(String color, String species, Integer legsCount) {
-        this(null, null, null, color, species, null, legsCount);
+        this("Unnamed", null, null, color, species, null, legsCount);
+    }
+    public Animal (String name, String species, Owner owner){
+        this(name, null, null, null, species, owner, null);
+    }
+    public Animal (String name, String species){
+        this(name, species, (Owner) null);
     }
 
     public void go(float speed, float time, String direction){
-        System.out.printf("%s %s went to %s for %.2f km in %.2f hours.\n",
+        System.out.printf("%s %s went %s for %.2f km in %.2f hours.\n",
                 this.species, this.name, direction, speed * time, time);
     }
     public void fly(float speed, float time, float height, String direction){
-        System.out.printf("%s %s flied to %s for %.2f km in %.2f hours at %.2f m height.\n",
+        System.out.printf("%s %s flied %s for %.2f km in %.2f hours at %.2f m height.\n",
                 this.species, this.name, direction, speed * time, time, height);
     }
     public void swim(float speed, float time, float depth, String direction){
-        System.out.printf("%s %s swam to %s for %.2f km in %.2f hours at %.2f m depth.\n",
+        System.out.printf("%s %s swam %s for %.2f km in %.2f hours at %.2f m depth.\n",
                 this.species, this.name, direction, speed * time, time, depth);
     }
     public Integer getAge() {
