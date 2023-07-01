@@ -14,7 +14,7 @@ public class Turtle extends Animal{
         super(name, species);
     }
     @Override
-    public void swim(float speed, float time, float depth, String direction) {
+    public void fly(float speed, float time, float height, String direction) {
         System.out.printf("%s %s: Sorry, born to crawl cannot fly.\n", this.species, this.name);
     }
 }
