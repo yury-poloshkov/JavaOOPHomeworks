@@ -1,6 +1,8 @@
-package org.example.animals;
+package org.example.clinique.animals.types;
 
-public class Dog extends Animal{
+import org.example.clinique.animals.Animal;
+
+public class Dog extends Animal {
 
     public Dog(String color, String species, Integer legsCount) {
         super(color, species, legsCount);

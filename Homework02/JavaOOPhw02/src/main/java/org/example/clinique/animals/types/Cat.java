@@ -1,8 +1,10 @@
-package org.example.animals;
+package org.example.clinique.animals.types;
+
+import org.example.clinique.animals.Animal;
 
 import java.util.Arrays;
 
-public class Cat extends Animal{
+public class Cat extends Animal {
 
     public Cat(String color, String species, Integer legsCount) {
         super(color, species, legsCount);

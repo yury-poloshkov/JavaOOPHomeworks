@@ -1,6 +1,10 @@
-package org.example.animals;
+package org.example.clinique.animals;
 
-import org.example.clients.Owner;
+import org.example.clinique.humans.clients.Owner;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Animal {
     protected String name;
@@ -10,6 +14,8 @@ public class Animal {
     protected String species;
     protected Owner owner;
     protected Integer legsCount;
+
+    protected List<String> medicalCard;
 
     //---Constructors---
     public Animal(String name, Integer age, String vaccination, String color,
@@ -21,6 +27,7 @@ public class Animal {
         this.species = species;
         this.owner = owner;
         this.legsCount = legsCount;
+        this.medicalCard = new ArrayList<>();
     }
     public Animal(String color, String species, Integer legsCount) {
         this("Unnamed", null, null, color, species, null, legsCount);
@@ -32,6 +39,18 @@ public class Animal {
         this(name, species, (Owner) null);
     }
 
+    public void setVaccination(String vaccine){
+        this.vaccination = vaccine;
+    }
+    public void addRecordToMedicalCard (String record){
+        this.medicalCard.add(record);
+    }
+    public void getMedicalRecords(){
+        System.out.printf("--- Medical Card for %s ---\n", this.toString());
+        for (String record: medicalCard) {
+            System.out.println(record);
+        }
+    }
     public Integer getAge() {
         return age;
     }

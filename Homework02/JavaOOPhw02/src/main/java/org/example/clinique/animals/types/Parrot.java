@@ -1,8 +1,9 @@
-package org.example.animals;
+package org.example.clinique.animals.types;
 
-import org.example.animals.interfaces.Flyable;
-import org.example.animals.interfaces.Soundable;
-import org.example.clients.Owner;
+import org.example.clinique.animals.Animal;
+import org.example.clinique.animals.interfaces.Flyable;
+import org.example.clinique.animals.interfaces.Soundable;
+import org.example.clinique.humans.clients.Owner;
 
 public class Parrot extends Animal implements Flyable, Soundable {
 

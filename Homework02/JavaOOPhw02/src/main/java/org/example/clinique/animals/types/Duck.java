@@ -1,10 +1,11 @@
-package org.example.animals;
+package org.example.clinique.animals.types;
 
-import org.example.animals.interfaces.Flyable;
-import org.example.animals.interfaces.Runable;
-import org.example.animals.interfaces.Soundable;
-import org.example.animals.interfaces.Swimable;
-import org.example.clients.Owner;
+import org.example.clinique.animals.Animal;
+import org.example.clinique.animals.interfaces.Flyable;
+import org.example.clinique.animals.interfaces.Runable;
+import org.example.clinique.animals.interfaces.Soundable;
+import org.example.clinique.animals.interfaces.Swimable;
+import org.example.clinique.humans.clients.Owner;
 
 public class Duck extends Animal implements Runable, Swimable, Flyable, Soundable {
 
