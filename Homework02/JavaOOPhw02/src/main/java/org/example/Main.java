@@ -40,7 +40,9 @@ public class Main {
         ((Nurse) cliniqueStuff.get(1)).washAnimal(animals.get(0), new Date(123,7,9));
         ((Nurse) cliniqueStuff.get(1)).groomAnimal(animals.get(0), new Date(123,7,9), "wings");
         ((Therapist) cliniqueStuff.get(2)).surveyAnimal(animals.get(0), new Date(123,7,9),
-                "primary survey", "СРОЧНО: вакцина от птичьего гриппа, удалить клюв!!!");
+                "primary survey", "Тяжелая форма птичьего гриппа");
+        ((Therapist) cliniqueStuff.get(2)).appointTreatment(animals.get(0), new Date(123,7,9),
+                "СРОЧНО: вакцина от птичьего гриппа, удалить клюв!!!");
         ((Therapist) cliniqueStuff.get(2)). vaccinateAnimal(animals.get(0), new Date(123,7,9),
                 "вакцина от птичьего гриппа");
         ((Surgeon) cliniqueStuff.get(0)).operateAnimal(animals.get(0), new Date(123,7,9),
