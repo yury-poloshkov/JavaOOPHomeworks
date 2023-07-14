@@ -1,0 +1,1 @@
+The WildCat {id=1, name='null', numberOfLimbs=4, registrationDate=2023-01-05, owner=incognito, records=[]}

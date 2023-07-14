@@ -1,0 +1,2 @@
+The Cat {id=2, name='Tom', numberOfLimbs=4, registrationDate=2022-04-13, owner=Ivanov Ivan, records=[]}
+The Cat {id=4, name='Mikka', numberOfLimbs=4, registrationDate=2022-04-13, owner=Ivanov Ivan, records=[]}
