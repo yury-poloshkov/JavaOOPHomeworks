@@ -2,7 +2,7 @@ package notebook.view;
 
 import notebook.controller.UserController;
 import notebook.model.User;
-import notebook.util.Commands;
+import notebook.controller.Commands;
 
 import java.util.List;
 import java.util.Scanner;
@@ -14,58 +14,113 @@ public class UserView {
         this.userController = userController;
     }
 
-    public void run(){
-        Commands com;
-
-        while (true) {
-            String command = prompt("������� �������: ");
-            com = Commands.valueOf(command);
-            if (com == Commands.EXIT) return;
+    public void run() {
+        Commands com = Commands.NONE;
+        while (com != Commands.EXIT) {
+            showMenu();
+            String command = prompt("Введите команду: ").toUpperCase();
+            try {
+                com = Commands.valueOf(command);
+            } catch (Exception e) {
+                System.out.println("Unsupported operation. Try again...");
+                com = Commands.NONE;
+                timeOut();
+            }
             switch (com) {
-                case CREATE:
-                    String firstName = prompt("���: ");
-                    String lastName = prompt("�������: ");
-                    String phone = prompt("����� ��������: ");
-                    userController.saveUser(new User(firstName, lastName, phone));
-                    break;
-                case READ:
-                    String id = prompt("������������� ������������: ");
+                case CREATE -> {
+                    System.out.println("----- Регистрация нового пользователя -----");
+                    String firstName = prompt("Имя: ");
+                    String lastName = prompt("Фамилия: ");
+                    String phone = prompt("Номер телефона: ");
+                    userController.createUser(new User(firstName, lastName, phone));
+                }
+                case READ -> {
+                    System.out.println("----- Введите данные пользователя для поиска -----");
+                    String id = prompt("Идентификатор пользователя: ");
                     try {
                         User user = userController.readUser(Long.parseLong(id));
-                        System.out.println(user);
-                        System.out.println();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
+                        if (user != null) {
+                            System.out.println((user));
+                        } else {
+                            System.out.printf("Пользователь с идентификатором %s не найден.\n", id);
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid identificator");
                     }
-                    break;
-                case LIST:
+                    timeOut();
+                }
+                case LIST -> {
                     try {
+                        System.out.println("----- Список пользователей -----");
                         List<User> users = userController.readAllUsers();
-                        System.out.println(users);
+                        for (User user : users) {
+                            System.out.print(user);
+                        }
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
-                    break;
-                case UPDATE:
+                    timeOut();
+                }
+                case UPDATE -> {
                     try {
-                        String name = prompt("���: ");
-                        String secondName = prompt("�������: ");
-                        String number = prompt("����� ��������: ");
-                        Long userid = Long.parseLong(prompt("������� ������������� ������������: "));
-                        User updated = new User(name, secondName, number);
-                        userController.updateUser(userid, updated);
-
-
-                    } catch (Exception e) {
+                        System.out.println("----- Обновление данных пользователя -----");
+                        System.out.println("(Нажмите ENTER, если не хотите менять поле)");
+                        Long userid = Long.parseLong(prompt("Введите идентификатор пользователя: "));
+                        User user = userController.readUser(userid);
+                        if (user != null) {
+                            String name = prompt("Имя: ");
+                            name = (name.equals("") ? user.getFirstName() : name);
+                            String secondName = prompt("Фамилия: ");
+                            secondName = (secondName.equals("") ? user.getLastName() : secondName);
+                            String number = prompt("Номер телефона: ");
+                            number = (number.equals("") ? user.getPhone() : number);
+                            User updated = new User(name, secondName, number);
+                            userController.updateUser(userid, updated);
+                        } else {
+                            System.out.printf("Пользователь с идентификатором %s не найден.\n", userid);
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid identificator");
+                        timeOut();
+                    }catch (Exception e) {
                         throw new RuntimeException(e);
                     }
+                }
+                case DELETE -> {
+                    try {
+                        System.out.println("----- Удаление пользователя -----");
+                        Long userid = Long.parseLong(prompt("Введите идентификатор пользователя: "));
+                        userController.deleteUser(userid);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid identificator");
+                        timeOut();
+                    }
+                }
             }
-        }
+            }
     }
 
-    private String prompt(String message) {
+    private void showMenu () {
+        StringBuilder sb = new StringBuilder();
+        sb.append("----- СПРАВОЧНИК ПОЛЬЗОВАТЕЛЕЙ v.2023.07.14 -----\n");
+        sb.append("ГЛАВНОЕ МЕНЮ:\n");
+        for (var item : Commands.values()) {
+            if (item != Commands.NONE) {
+                sb.append(" ").append(item).append("\n");
+            }
+        }
+        sb.append("-----------------------------------------");
+        System.out.print("\033[H\033[J");
+        System.out.println(sb);
+    }
+    private String prompt(String message){
         Scanner in = new Scanner(System.in);
         System.out.print(message);
         return in.nextLine();
+    }
+    private void timeOut() {
+        System.out.println("Press ENTER to continue");
+        Scanner stopScn = new Scanner(System.in);
+        stopScn.nextLine();
     }
 }

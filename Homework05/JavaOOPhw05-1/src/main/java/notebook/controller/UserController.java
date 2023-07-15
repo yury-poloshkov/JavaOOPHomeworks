@@ -1,10 +1,8 @@
 package notebook.controller;
 
 import notebook.model.User;
-import notebook.repository.GBRepository;
-
+import notebook.model.repository.GBRepository;
 import java.util.List;
-import java.util.Objects;
 
 public class UserController {
     private final GBRepository<User, Long> repository;
@@ -13,29 +11,21 @@ public class UserController {
         this.repository = repository;
     }
 
-    public void saveUser(User user) {
+    public void createUser(User user) {
         repository.create(user);
     }
-
-    public User readUser(Long userId) throws Exception {
-        List<User> users = repository.findAll();
-        for (User user : users) {
-            if (Objects.equals(user.getId(), userId)) {
-                return user;
-            }
-        }
-
-        throw new RuntimeException("User not found");
+    public User readUser(Long userId) {
+        return repository.findById(userId);
     }
-
     public List<User> readAllUsers() {
         return repository.findAll();
     }
-
     public void updateUser(Long userid, User user) {
         user.setId(userid);
         repository.update(userid, user);
-
+    }
+    public void deleteUser(Long userid) {
+        repository.delete(userid);
     }
 }
 

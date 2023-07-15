@@ -1,11 +1,11 @@
-package notebook.util;
+package notebook.controller;
 
 public enum Commands {
     NONE,
-    READ,
     CREATE,
-    UPDATE,
+    READ,
     LIST,
+    UPDATE,
     DELETE,
     EXIT
 }

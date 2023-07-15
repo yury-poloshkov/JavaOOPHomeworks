@@ -7,9 +7,9 @@ public class User {
     private String phone;
 
     public User(String firstName, String lastName, String phone) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phone = phone;
+        this.firstName = (firstName == "" ? "unknown":firstName);
+        this.lastName = (lastName == "" ? "unknown":lastName);
+        this.phone = (phone == "" ? "unknown":phone);
     }
 
     public User(Long id, String firstName, String lastName, String phone) {
@@ -51,6 +51,6 @@ public class User {
 
     @Override
     public String toString() {
-        return String.format("Идентафикатор: %s\nИмя: %s,\nФамилия: %s,\nТелефон: %s", id, firstName, lastName, phone);
+        return String.format("РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ: %s, РРјСЏ: %s, Р¤Р°РјРёР»РёСЏ: %s, РўРµР»РµС„РѕРЅ: %s\n", id, firstName, lastName, phone);
     }
 }
