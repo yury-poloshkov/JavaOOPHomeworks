@@ -2,7 +2,7 @@ package notebook;
 
 import notebook.controller.UserController;
 import notebook.model.User;
-import notebook.model.repository.DBConnector;
+import notebook.model.DBConnector;
 import notebook.model.repository.GBRepository;
 import notebook.model.repository.impl.UserRepository;
 import notebook.view.UserView;

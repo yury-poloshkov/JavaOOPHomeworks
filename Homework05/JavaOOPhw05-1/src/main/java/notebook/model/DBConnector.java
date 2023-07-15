@@ -1,4 +1,4 @@
-package notebook.model.repository;
+package notebook.model;
 
 import java.io.*;
 import java.util.ArrayList;

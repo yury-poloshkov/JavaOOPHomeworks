@@ -2,7 +2,7 @@ package notebook.model.repository.impl;
 
 import notebook.model.repository.mapper.impl.UserMapper;
 import notebook.model.User;
-import notebook.model.repository.DBConnector;
+import notebook.model.DBConnector;
 import notebook.model.repository.GBRepository;
 
 import java.util.ArrayList;
@@ -75,9 +75,10 @@ public class UserRepository implements GBRepository<User, Long> {
             for (int i = users.size()-1; i >= 0; i--){
                 if (users.get(i).getId().equals(id)){
                     users.remove(i);
+                    saveAll(users);
+                    return true;
                 }
             }
-            saveAll(users);
         }catch (Exception e){
             System.out.printf("Пользователь с идентификатором %s не найден\n", id);
         }
