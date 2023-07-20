@@ -2,7 +2,7 @@ package notebook.repository.model;
 
 import java.time.LocalDate;
 
-public class Note {
+public class Note implements Comparable<Note>{
     private Long id;
     private Long userID;
     private LocalDate date;
@@ -72,5 +72,10 @@ public class Note {
 
     public String toString() {
         return String.format("Идентификатор: %s, Дата: %s, Тема: %s, Заметка: %s\n", id, date, head, body);
+    }
+
+    @Override
+    public int compareTo(Note n) {
+        return date.compareTo(n.getDate());
     }
 }

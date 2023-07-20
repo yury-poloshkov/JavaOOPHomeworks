@@ -1,7 +1,5 @@
 package notebook.core;
 
-import notebook.repository.model.User;
-
 import java.util.List;
 import java.util.Optional;
 

@@ -3,8 +3,6 @@ package notebook.core.mapper.impl;
 import notebook.core.mapper.Mapper;
 import notebook.repository.model.User;
 
-import static java.lang.Character.isDigit;
-
 public class UserMapper implements Mapper<User, String> {
     @Override
     public String toInput(User user) {

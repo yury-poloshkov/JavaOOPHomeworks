@@ -6,14 +6,17 @@ import notebook.repository.model.Note;
 import notebook.ui.View;
 
 import java.util.List;
+import java.util.TreeSet;
 
 public class NotebookView implements View {
-    private Long userID;
+    private final Long userID;
+    private final String userFullName;
     private final NoteController noteController;
 
-    public NotebookView(NoteController noteController, Long userID) {
+    public NotebookView(NoteController noteController, Long userID, String userName) {
         this.userID = userID;
         this.noteController = noteController;
+        this.userFullName = userName;
     }
 
     @Override
@@ -21,6 +24,7 @@ public class NotebookView implements View {
         Commands com = Commands.NONE;
         while (com != Commands.EXIT) {
             showMenu("----- АРХИВ ЗАПИСЕЙ v.2023.07.20 -----\n"
+                    + "пользователя " + userFullName + "\n"
                     + "ГЛАВНОЕ МЕНЮ:\n");
             String command = prompt("Введите команду: ").toUpperCase();
             try {
@@ -42,7 +46,7 @@ public class NotebookView implements View {
                     String id = prompt("Идентификатор заметки: ");
                     try {
                         Note note = noteController.readNote(Long.parseLong(id));
-                        if (note != null) {
+                        if (note != null && note.getUserID() == userID) {
                             System.out.println((note));
                         } else {
                             System.out.printf("Заметка с идентификатором %s не найдена.\n", id);
@@ -56,8 +60,14 @@ public class NotebookView implements View {
                     try {
                         System.out.println("----- Список заметок -----");
                         List<Note> notes = noteController.readAllNotes();
+                        TreeSet<Note> sortedNotes = new TreeSet<>();
                         for (Note note : notes) {
-                            System.out.print(note);
+                            if (note.getUserID() == userID) {
+                                sortedNotes.add(note);
+                            }
+                        }
+                        for (Note note : sortedNotes){
+                            System.out.println(note);
                         }
                     } catch (Exception e) {
                         throw new RuntimeException(e);

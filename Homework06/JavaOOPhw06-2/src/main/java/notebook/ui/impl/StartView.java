@@ -25,12 +25,19 @@ public class StartView implements View {
                     System.out.println("----- Вход в личную записную книжку -----");
                     try {
                         Long userID = Long.parseLong(prompt("Введите иденификатор пользователя: "));
-                        timeOut();
-                        String dbPath = "notes.txt";
-                        GBRepository<Note, Long> repository = new NoteRepository(new DBConnector(dbPath));
-                        NoteController controller = new NoteController(repository);
-                        NotebookView view = new NotebookView(controller, userID);
-                        view.run();
+                        String userDBPath = "users.txt";
+                        GBRepository<User, Long> userRepository = new UserRepository(new DBConnector(userDBPath));
+                        User user = userRepository.findById(userID);
+                        if (user != null) {
+                            String dbPath = "notes.txt";
+                            String userName = user.getFirstName() + " " + user.getLastName();
+                            System.out.println("Logging as " + userName);
+                            timeOut();
+                            GBRepository<Note, Long> repository = new NoteRepository(new DBConnector(dbPath));
+                            NoteController controller = new NoteController(repository);
+                            NotebookView view = new NotebookView(controller, userID, userName);
+                            view.run();
+                        }
                     } catch (Exception e) {
                         System.out.println("Access denied! Invalid user/password...");
                     }

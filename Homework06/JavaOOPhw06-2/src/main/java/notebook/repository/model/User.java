@@ -7,9 +7,9 @@ public class User {
     private String phone;
 
     public User(String firstName, String lastName, String phone) {
-        this.firstName = (firstName == "" ? "unknown":firstName);
-        this.lastName = (lastName == "" ? "unknown":lastName);
-        this.phone = (phone == "" ? "unknown":phone);
+        this.firstName = (firstName.equals("") ? "unknown":firstName);
+        this.lastName = (lastName.equals("") ? "unknown":lastName);
+        this.phone = (phone.equals("") ? "unknown":phone);
     }
 
     public User(Long id, String firstName, String lastName, String phone) {

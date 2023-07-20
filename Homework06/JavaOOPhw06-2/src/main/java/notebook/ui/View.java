@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public interface View {
 
-    public void run();
+    void run();
 
     default void showMenu(String header) {
         StringBuilder sb = new StringBuilder();

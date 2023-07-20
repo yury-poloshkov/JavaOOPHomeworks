@@ -2,8 +2,6 @@ package notebook.core.mapper.impl;
 
 import notebook.core.mapper.Mapper;
 import notebook.repository.model.Note;
-import notebook.repository.model.User;
-
 import java.time.LocalDate;
 
 public class NoteMapper implements Mapper<Note, String> {
