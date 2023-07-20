@@ -1,7 +1,5 @@
 package homework.repository.model;
 
-import homework.repository.Persister;
-
 public class User{
     private final String name;
 
