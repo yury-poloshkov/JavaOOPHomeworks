@@ -15,3 +15,5 @@
 [к семинару №5: От простого к практике.](/Homework05/readme.md)
 
 [к семинару №6: ООП Дизайн и Solid.](/Homework06/readme.md)
+
+[к семинару №7: ООП Дизайн и Solid ч.2](/Homework07/readme.md)
