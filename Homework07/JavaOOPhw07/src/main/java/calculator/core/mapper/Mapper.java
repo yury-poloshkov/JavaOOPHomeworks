@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface Mapper {
 
-    public String toOutput(ArrayList<Float> numbers);
+    String toOutput(ArrayList<Float> numbers);
 
-    public ArrayList<Float> fromInput (List<String> numbers);
+    ArrayList<Float> fromInput (List<String> numbers);
 }

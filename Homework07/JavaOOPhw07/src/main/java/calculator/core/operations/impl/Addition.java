@@ -24,9 +24,8 @@ public class Addition implements Operation {
         ArrayList<Float> numbers = new ArrayList<>(4);
         numbers.addAll(mapper.fromInput(incNumbers));
         ArrayList<Float> result = new ArrayList<>(2);
-        result.add(0,numbers.get(0) + numbers.get(2));
+        result.add(0, numbers.get(0) + numbers.get(2));
         result.add(1, numbers.get(1) + numbers.get(3));
         return mapper.toOutput(result);
-        //return numbers.get(0) + operation + numbers.get(1);
     }
 }

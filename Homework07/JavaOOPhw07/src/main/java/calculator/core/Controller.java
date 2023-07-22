@@ -12,10 +12,14 @@ public class Controller {
 
     public String calculate(List<String> numbers, String operation) {
         String result = "Error: Invalid operation";
-        for (Operation op: functions) {
-            if (operation.equals(op.getOperation())) {
-                result = op.calculate(numbers);
+        try {
+            for (Operation op: functions) {
+                if (operation.equals(op.getOperation())) {
+                    result = op.calculate(numbers);
+                }
             }
+        } catch (NumberFormatException e) {
+            result = "Invalid data";
         }
         return result;
     }

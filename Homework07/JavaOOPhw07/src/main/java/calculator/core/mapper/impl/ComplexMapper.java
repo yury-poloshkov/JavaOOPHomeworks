@@ -8,11 +8,9 @@ import java.util.List;
 public class ComplexMapper implements Mapper {
     @Override
     public String toOutput(ArrayList<Float> numbers) {
-        StringBuilder result = new StringBuilder();
-        result.append(numbers.get(0) != 0 ? numbers.get(0):"");
-        result.append(numbers.get(1) != 0 ?
-                (numbers.get(1) < 0 ? numbers.get(1) + "*i" : "+" + numbers.get(1) + "*i" ): "");
-        return result.toString();
+        return (numbers.get(0) != 0 ? numbers.get(0) : "") +
+                (numbers.get(1) != 0 ?
+                        (numbers.get(1) < 0 ? numbers.get(1) + "*i" : "+" + numbers.get(1) + "*i") : "");
     }
 
     @Override
@@ -29,7 +27,7 @@ public class ComplexMapper implements Mapper {
                 number = number.replace(",", ".");
                 number = number.replace("-", ";-");
                 number = number.replace("+", ";");
-                if (number.substring(0, 1).equals(";")) {
+                if (!number.isEmpty() && number.charAt(0) == ';') {
                     number = number.replaceFirst(";", "");
                 }
                 String[] splitedNumbers = number.split(";");
@@ -39,6 +37,7 @@ public class ComplexMapper implements Mapper {
                     splitedNumbers[1] = temp;
                 }
                 for (int i = 0; i < splitedNumbers.length; i++) {
+
                     int indent = 0;
                     if (splitedNumbers[i].contains("i")) {
                         indent = 1;

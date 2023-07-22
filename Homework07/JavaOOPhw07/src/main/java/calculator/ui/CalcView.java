@@ -7,35 +7,46 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
+import java.util.logging.*;
 
 public class CalcView {
-    private List<Operation> functions;
-    private List<String> numbers;
+    private final List<Operation> functions;
+    private final List<String> numbers;
     private String operation;
 
-    private Controller controller;
+    private final Controller controller;
 
     public CalcView(List<Operation> calcFunctions) {
         this.numbers = new ArrayList<>();
         this.operation = null;
-        this.controller = new Controller(calcFunctions);
+        this.functions = calcFunctions;
+        this.controller = new Controller(functions);
     }
 
     public void run(){
-//        Logger logger = new Logger();
-//        logger.addHandler(new FileHandler("log.txt"));
+        LogManager.getLogManager().reset();
+        Logger logger = Logger.getLogger(CalcView.class.getName());
+        try {
+            FileHandler fh = new FileHandler("log.txt", true);
+            fh.setFormatter(new SimpleFormatter());
+            logger.addHandler(fh);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        logger.log(Level.INFO,"Application launched");
         do {
             inputExpression();
+            logger.info("User input: " + numbers + ", operation: " + operation);
             if (!numbers.isEmpty() && !operation.isEmpty()){
                 System.out.println("------------------------------------------------------");
                 String result = controller.calculate(numbers, operation);
                 result = result.contains("NaN") ? "Error: division by zero" : result;
                 System.out.println("Результат: " + result);
+                logger.info("Calculation result: " + result);
                 timeOut();
             }
         } while (!operation.isEmpty());
+        logger.info("Application closed");
     }
 
     private void inputExpression() {
